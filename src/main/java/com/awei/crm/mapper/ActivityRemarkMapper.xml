@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.awei.crm.mapper.ActivityRemarkMapper">
+  <resultMap id="BaseResultMap" type="com.awei.crm.model.ActivityRemark">
+    <id column="id" jdbcType="CHAR" property="id" />
+    <result column="noteContent" jdbcType="VARCHAR" property="noteContent" />
+    <result column="createTime" jdbcType="CHAR" property="createTime" />
+    <result column="createBy" jdbcType="VARCHAR" property="createBy" />
+    <result column="editTime" jdbcType="CHAR" property="editTime" />
+    <result column="editBy" jdbcType="VARCHAR" property="editBy" />
+    <result column="editFlag" jdbcType="CHAR" property="editFlag" />
+    <result column="activityId" jdbcType="CHAR" property="activityId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, noteContent, createTime, createBy, editTime, editBy, editFlag, activityId
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_activity_remark
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tbl_activity_remark
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.awei.crm.model.ActivityRemark">
+    insert into tbl_activity_remark (id, noteContent, createTime, 
+      createBy, editTime, editBy, 
+      editFlag, activityId)
+    values (#{id,jdbcType=CHAR}, #{noteContent,jdbcType=VARCHAR}, #{createTime,jdbcType=CHAR}, 
+      #{createBy,jdbcType=VARCHAR}, #{editTime,jdbcType=CHAR}, #{editBy,jdbcType=VARCHAR}, 
+      #{editFlag,jdbcType=CHAR}, #{activityId,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.awei.crm.model.ActivityRemark">
+    insert into tbl_activity_remark
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="noteContent != null">
+        noteContent,
+      </if>
+      <if test="createTime != null">
+        createTime,
+      </if>
+      <if test="createBy != null">
+        createBy,
+      </if>
+      <if test="editTime != null">
+        editTime,
+      </if>
+      <if test="editBy != null">
+        editBy,
+      </if>
+      <if test="editFlag != null">
+        editFlag,
+      </if>
+      <if test="activityId != null">
+        activityId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="noteContent != null">
+        #{noteContent,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="editTime != null">
+        #{editTime,jdbcType=CHAR},
+      </if>
+      <if test="editBy != null">
+        #{editBy,jdbcType=VARCHAR},
+      </if>
+      <if test="editFlag != null">
+        #{editFlag,jdbcType=CHAR},
+      </if>
+      <if test="activityId != null">
+        #{activityId,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.awei.crm.model.ActivityRemark">
+    update tbl_activity_remark
+    <set>
+      <if test="noteContent != null">
+        noteContent = #{noteContent,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="createBy != null">
+        createBy = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="editTime != null">
+        editTime = #{editTime,jdbcType=CHAR},
+      </if>
+      <if test="editBy != null">
+        editBy = #{editBy,jdbcType=VARCHAR},
+      </if>
+      <if test="editFlag != null">
+        editFlag = #{editFlag,jdbcType=CHAR},
+      </if>
+      <if test="activityId != null">
+        activityId = #{activityId,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.awei.crm.model.ActivityRemark">
+    update tbl_activity_remark
+    set noteContent = #{noteContent,jdbcType=VARCHAR},
+      createTime = #{createTime,jdbcType=CHAR},
+      createBy = #{createBy,jdbcType=VARCHAR},
+      editTime = #{editTime,jdbcType=CHAR},
+      editBy = #{editBy,jdbcType=VARCHAR},
+      editFlag = #{editFlag,jdbcType=CHAR},
+      activityId = #{activityId,jdbcType=CHAR}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+
+  <select id="getRemarkById" resultType="activityRemark">
+          select id
+             ,  noteContent
+             ,  createTime
+             ,  createBy
+             ,  editTime
+             ,  editBy
+             ,  editFlag
+             ,  activityId from tbl_activity_remark where activityId =#{id}
+             order by createTime,editTime
+      </select>
+
+
+  <delete id="deleteRemarkById">
+        delete from tbl_activity_remark where id =#{id}
+    </delete>
+
+
+
+  <insert id="saveRemark" parameterType="activityRemark">
+        insert into tbl_activity_remark(id,noteContent,createTime,createBy,editFlag,activityId)
+        values (#{id},#{noteContent},#{createTime},#{createBy},#{editFlag},#{activityId})
+
+    </insert>
+
+  <select id="getRemarkByMainId" resultType="activityRemark">
+        select id
+             ,  noteContent
+             ,  createTime
+             ,  createBy
+             ,  editTime
+             ,  editBy
+             ,  editFlag
+             ,  activityId from tbl_activity_remark where id =#{id}
+    </select>
+
+  <update id="updateRemark" parameterType="activityRemark">
+        update tbl_activity_remark set
+        noteContent=#{noteContent},
+        editTime=#{editTime},
+        editBy=#{editBy},
+        editFlag=#{editFlag}
+        where id =#{id}
+    </update>
+
+</mapper>

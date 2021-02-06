@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.awei.crm.mapper.ClueActivityRelationMapper">
+  <resultMap id="BaseResultMap" type="com.awei.crm.model.ClueActivityRelation">
+    <id column="id" jdbcType="CHAR" property="id" />
+    <result column="clueId" jdbcType="CHAR" property="clueId" />
+    <result column="activityId" jdbcType="CHAR" property="activityId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, clueId, activityId
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_clue_activity_relation
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tbl_clue_activity_relation
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.awei.crm.model.ClueActivityRelation">
+    insert into tbl_clue_activity_relation (id, clueId, activityId
+      )
+    values (#{id,jdbcType=CHAR}, #{clueId,jdbcType=CHAR}, #{activityId,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.awei.crm.model.ClueActivityRelation">
+    insert into tbl_clue_activity_relation
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="clueId != null">
+        clueId,
+      </if>
+      <if test="activityId != null">
+        activityId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="clueId != null">
+        #{clueId,jdbcType=CHAR},
+      </if>
+      <if test="activityId != null">
+        #{activityId,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.awei.crm.model.ClueActivityRelation">
+    update tbl_clue_activity_relation
+    <set>
+      <if test="clueId != null">
+        clueId = #{clueId,jdbcType=CHAR},
+      </if>
+      <if test="activityId != null">
+        activityId = #{activityId,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.awei.crm.model.ClueActivityRelation">
+    update tbl_clue_activity_relation
+    set clueId = #{clueId,jdbcType=CHAR},
+      activityId = #{activityId,jdbcType=CHAR}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+</mapper>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <!--加载属性文件-->
+    <properties resource="conf/jdbc.properties"></properties>
+    <!--设置别名-->
+    <typeAliases>
+        <!--实体类包名-->
+        <package name="com.awei.crm.model"/>
+    </typeAliases>
+    <mappers>
+        <!--
+            name:包名，包中的所有xml文件都能被加载
+            使用package要求：mapper文件和类名一致
+            mapper文件和类名在同一目录
+        -->
+        <package name="com.awei.crm.mapper"/>
+
+    </mappers>
+
+</configuration>

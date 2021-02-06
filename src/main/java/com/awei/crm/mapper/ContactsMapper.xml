@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.awei.crm.mapper.ContactsMapper">
+  <resultMap id="BaseResultMap" type="com.awei.crm.model.Contacts">
+    <id column="id" jdbcType="CHAR" property="id" />
+    <result column="owner" jdbcType="CHAR" property="owner" />
+    <result column="source" jdbcType="VARCHAR" property="source" />
+    <result column="customerId" jdbcType="CHAR" property="customerId" />
+    <result column="fullname" jdbcType="VARCHAR" property="fullname" />
+    <result column="appellation" jdbcType="VARCHAR" property="appellation" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="mphone" jdbcType="VARCHAR" property="mphone" />
+    <result column="job" jdbcType="VARCHAR" property="job" />
+    <result column="birth" jdbcType="CHAR" property="birth" />
+    <result column="createBy" jdbcType="VARCHAR" property="createBy" />
+    <result column="createTime" jdbcType="CHAR" property="createTime" />
+    <result column="editBy" jdbcType="VARCHAR" property="editBy" />
+    <result column="editTime" jdbcType="CHAR" property="editTime" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="contactSummary" jdbcType="VARCHAR" property="contactSummary" />
+    <result column="nextContactTime" jdbcType="CHAR" property="nextContactTime" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, owner, source, customerId, fullname, appellation, email, mphone, job, birth, 
+    createBy, createTime, editBy, editTime, description, contactSummary, nextContactTime, 
+    address
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_contacts
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tbl_contacts
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.awei.crm.model.Contacts">
+    insert into tbl_contacts (id, owner, source, 
+      customerId, fullname, appellation, 
+      email, mphone, job, 
+      birth, createBy, createTime, 
+      editBy, editTime, description, 
+      contactSummary, nextContactTime, address
+      )
+    values (#{id,jdbcType=CHAR}, #{owner,jdbcType=CHAR}, #{source,jdbcType=VARCHAR}, 
+      #{customerId,jdbcType=CHAR}, #{fullname,jdbcType=VARCHAR}, #{appellation,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{mphone,jdbcType=VARCHAR}, #{job,jdbcType=VARCHAR}, 
+      #{birth,jdbcType=CHAR}, #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=CHAR}, 
+      #{editBy,jdbcType=VARCHAR}, #{editTime,jdbcType=CHAR}, #{description,jdbcType=VARCHAR}, 
+      #{contactSummary,jdbcType=VARCHAR}, #{nextContactTime,jdbcType=CHAR}, #{address,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.awei.crm.model.Contacts">
+    insert into tbl_contacts
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="owner != null">
+        owner,
+      </if>
+      <if test="source != null">
+        source,
+      </if>
+      <if test="customerId != null">
+        customerId,
+      </if>
+      <if test="fullname != null">
+        fullname,
+      </if>
+      <if test="appellation != null">
+        appellation,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="mphone != null">
+        mphone,
+      </if>
+      <if test="job != null">
+        job,
+      </if>
+      <if test="birth != null">
+        birth,
+      </if>
+      <if test="createBy != null">
+        createBy,
+      </if>
+      <if test="createTime != null">
+        createTime,
+      </if>
+      <if test="editBy != null">
+        editBy,
+      </if>
+      <if test="editTime != null">
+        editTime,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="contactSummary != null">
+        contactSummary,
+      </if>
+      <if test="nextContactTime != null">
+        nextContactTime,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="owner != null">
+        #{owner,jdbcType=CHAR},
+      </if>
+      <if test="source != null">
+        #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="customerId != null">
+        #{customerId,jdbcType=CHAR},
+      </if>
+      <if test="fullname != null">
+        #{fullname,jdbcType=VARCHAR},
+      </if>
+      <if test="appellation != null">
+        #{appellation,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="mphone != null">
+        #{mphone,jdbcType=VARCHAR},
+      </if>
+      <if test="job != null">
+        #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="birth != null">
+        #{birth,jdbcType=CHAR},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="editBy != null">
+        #{editBy,jdbcType=VARCHAR},
+      </if>
+      <if test="editTime != null">
+        #{editTime,jdbcType=CHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="contactSummary != null">
+        #{contactSummary,jdbcType=VARCHAR},
+      </if>
+      <if test="nextContactTime != null">
+        #{nextContactTime,jdbcType=CHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.awei.crm.model.Contacts">
+    update tbl_contacts
+    <set>
+      <if test="owner != null">
+        owner = #{owner,jdbcType=CHAR},
+      </if>
+      <if test="source != null">
+        source = #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="customerId != null">
+        customerId = #{customerId,jdbcType=CHAR},
+      </if>
+      <if test="fullname != null">
+        fullname = #{fullname,jdbcType=VARCHAR},
+      </if>
+      <if test="appellation != null">
+        appellation = #{appellation,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="mphone != null">
+        mphone = #{mphone,jdbcType=VARCHAR},
+      </if>
+      <if test="job != null">
+        job = #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="birth != null">
+        birth = #{birth,jdbcType=CHAR},
+      </if>
+      <if test="createBy != null">
+        createBy = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="editBy != null">
+        editBy = #{editBy,jdbcType=VARCHAR},
+      </if>
+      <if test="editTime != null">
+        editTime = #{editTime,jdbcType=CHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="contactSummary != null">
+        contactSummary = #{contactSummary,jdbcType=VARCHAR},
+      </if>
+      <if test="nextContactTime != null">
+        nextContactTime = #{nextContactTime,jdbcType=CHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.awei.crm.model.Contacts">
+    update tbl_contacts
+    set owner = #{owner,jdbcType=CHAR},
+      source = #{source,jdbcType=VARCHAR},
+      customerId = #{customerId,jdbcType=CHAR},
+      fullname = #{fullname,jdbcType=VARCHAR},
+      appellation = #{appellation,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      mphone = #{mphone,jdbcType=VARCHAR},
+      job = #{job,jdbcType=VARCHAR},
+      birth = #{birth,jdbcType=CHAR},
+      createBy = #{createBy,jdbcType=VARCHAR},
+      createTime = #{createTime,jdbcType=CHAR},
+      editBy = #{editBy,jdbcType=VARCHAR},
+      editTime = #{editTime,jdbcType=CHAR},
+      description = #{description,jdbcType=VARCHAR},
+      contactSummary = #{contactSummary,jdbcType=VARCHAR},
+      nextContactTime = #{nextContactTime,jdbcType=CHAR},
+      address = #{address,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+</mapper>

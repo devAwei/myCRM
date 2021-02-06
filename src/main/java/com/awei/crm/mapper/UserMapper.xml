@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.awei.crm.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.awei.crm.model.User">
+    <id column="id" jdbcType="CHAR" property="id" />
+    <result column="loginAct" jdbcType="VARCHAR" property="loginAct" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="loginPwd" jdbcType="VARCHAR" property="loginPwd" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="expireTime" jdbcType="CHAR" property="expireTime" />
+    <result column="lockState" jdbcType="CHAR" property="lockState" />
+    <result column="deptno" jdbcType="CHAR" property="deptno" />
+    <result column="allowIps" jdbcType="VARCHAR" property="allowIps" />
+    <result column="createTime" jdbcType="CHAR" property="createTime" />
+    <result column="createBy" jdbcType="VARCHAR" property="createBy" />
+    <result column="editTime" jdbcType="CHAR" property="editTime" />
+    <result column="editBy" jdbcType="VARCHAR" property="editBy" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, loginAct, name, loginPwd, email, expireTime, lockState, deptno, allowIps, createTime, 
+    createBy, editTime, editBy
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_user
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tbl_user
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.awei.crm.model.User">
+    insert into tbl_user (id, loginAct, name, 
+      loginPwd, email, expireTime, 
+      lockState, deptno, allowIps, 
+      createTime, createBy, editTime, 
+      editBy)
+    values (#{id,jdbcType=CHAR}, #{loginAct,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{loginPwd,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{expireTime,jdbcType=CHAR}, 
+      #{lockState,jdbcType=CHAR}, #{deptno,jdbcType=CHAR}, #{allowIps,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=CHAR}, #{createBy,jdbcType=VARCHAR}, #{editTime,jdbcType=CHAR}, 
+      #{editBy,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.awei.crm.model.User">
+    insert into tbl_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="loginAct != null">
+        loginAct,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="loginPwd != null">
+        loginPwd,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="expireTime != null">
+        expireTime,
+      </if>
+      <if test="lockState != null">
+        lockState,
+      </if>
+      <if test="deptno != null">
+        deptno,
+      </if>
+      <if test="allowIps != null">
+        allowIps,
+      </if>
+      <if test="createTime != null">
+        createTime,
+      </if>
+      <if test="createBy != null">
+        createBy,
+      </if>
+      <if test="editTime != null">
+        editTime,
+      </if>
+      <if test="editBy != null">
+        editBy,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="loginAct != null">
+        #{loginAct,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="loginPwd != null">
+        #{loginPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="expireTime != null">
+        #{expireTime,jdbcType=CHAR},
+      </if>
+      <if test="lockState != null">
+        #{lockState,jdbcType=CHAR},
+      </if>
+      <if test="deptno != null">
+        #{deptno,jdbcType=CHAR},
+      </if>
+      <if test="allowIps != null">
+        #{allowIps,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="editTime != null">
+        #{editTime,jdbcType=CHAR},
+      </if>
+      <if test="editBy != null">
+        #{editBy,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.awei.crm.model.User">
+    update tbl_user
+    <set>
+      <if test="loginAct != null">
+        loginAct = #{loginAct,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="loginPwd != null">
+        loginPwd = #{loginPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="expireTime != null">
+        expireTime = #{expireTime,jdbcType=CHAR},
+      </if>
+      <if test="lockState != null">
+        lockState = #{lockState,jdbcType=CHAR},
+      </if>
+      <if test="deptno != null">
+        deptno = #{deptno,jdbcType=CHAR},
+      </if>
+      <if test="allowIps != null">
+        allowIps = #{allowIps,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="createBy != null">
+        createBy = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="editTime != null">
+        editTime = #{editTime,jdbcType=CHAR},
+      </if>
+      <if test="editBy != null">
+        editBy = #{editBy,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.awei.crm.model.User">
+    update tbl_user
+    set loginAct = #{loginAct,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      loginPwd = #{loginPwd,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      expireTime = #{expireTime,jdbcType=CHAR},
+      lockState = #{lockState,jdbcType=CHAR},
+      deptno = #{deptno,jdbcType=CHAR},
+      allowIps = #{allowIps,jdbcType=VARCHAR},
+      createTime = #{createTime,jdbcType=CHAR},
+      createBy = #{createBy,jdbcType=VARCHAR},
+      editTime = #{editTime,jdbcType=CHAR},
+      editBy = #{editBy,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+
+
+  <select id="login" resultType="user">
+        select * from tbl_user  where loginAct=#{loginAct} and loginPwd=#{loginPwd}
+    </select>
+  <select id="getUserList" resultType="user">
+        select * from tbl_user
+    </select>
+</mapper>

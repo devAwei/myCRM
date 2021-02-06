@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.awei.crm.mapper.ClueRemarkMapper">
+  <resultMap id="BaseResultMap" type="com.awei.crm.model.ClueRemark">
+    <id column="id" jdbcType="CHAR" property="id" />
+    <result column="noteContent" jdbcType="VARCHAR" property="noteContent" />
+    <result column="createBy" jdbcType="VARCHAR" property="createBy" />
+    <result column="createTime" jdbcType="CHAR" property="createTime" />
+    <result column="editBy" jdbcType="VARCHAR" property="editBy" />
+    <result column="editTime" jdbcType="CHAR" property="editTime" />
+    <result column="editFlag" jdbcType="CHAR" property="editFlag" />
+    <result column="clueId" jdbcType="CHAR" property="clueId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, noteContent, createBy, createTime, editBy, editTime, editFlag, clueId
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_clue_remark
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tbl_clue_remark
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.awei.crm.model.ClueRemark">
+    insert into tbl_clue_remark (id, noteContent, createBy, 
+      createTime, editBy, editTime, 
+      editFlag, clueId)
+    values (#{id,jdbcType=CHAR}, #{noteContent,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=CHAR}, #{editBy,jdbcType=VARCHAR}, #{editTime,jdbcType=CHAR}, 
+      #{editFlag,jdbcType=CHAR}, #{clueId,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.awei.crm.model.ClueRemark">
+    insert into tbl_clue_remark
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="noteContent != null">
+        noteContent,
+      </if>
+      <if test="createBy != null">
+        createBy,
+      </if>
+      <if test="createTime != null">
+        createTime,
+      </if>
+      <if test="editBy != null">
+        editBy,
+      </if>
+      <if test="editTime != null">
+        editTime,
+      </if>
+      <if test="editFlag != null">
+        editFlag,
+      </if>
+      <if test="clueId != null">
+        clueId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="noteContent != null">
+        #{noteContent,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="editBy != null">
+        #{editBy,jdbcType=VARCHAR},
+      </if>
+      <if test="editTime != null">
+        #{editTime,jdbcType=CHAR},
+      </if>
+      <if test="editFlag != null">
+        #{editFlag,jdbcType=CHAR},
+      </if>
+      <if test="clueId != null">
+        #{clueId,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.awei.crm.model.ClueRemark">
+    update tbl_clue_remark
+    <set>
+      <if test="noteContent != null">
+        noteContent = #{noteContent,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        createBy = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="editBy != null">
+        editBy = #{editBy,jdbcType=VARCHAR},
+      </if>
+      <if test="editTime != null">
+        editTime = #{editTime,jdbcType=CHAR},
+      </if>
+      <if test="editFlag != null">
+        editFlag = #{editFlag,jdbcType=CHAR},
+      </if>
+      <if test="clueId != null">
+        clueId = #{clueId,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.awei.crm.model.ClueRemark">
+    update tbl_clue_remark
+    set noteContent = #{noteContent,jdbcType=VARCHAR},
+      createBy = #{createBy,jdbcType=VARCHAR},
+      createTime = #{createTime,jdbcType=CHAR},
+      editBy = #{editBy,jdbcType=VARCHAR},
+      editTime = #{editTime,jdbcType=CHAR},
+      editFlag = #{editFlag,jdbcType=CHAR},
+      clueId = #{clueId,jdbcType=CHAR}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+</mapper>

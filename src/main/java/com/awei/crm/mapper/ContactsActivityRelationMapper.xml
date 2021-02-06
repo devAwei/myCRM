@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.awei.crm.mapper.ContactsActivityRelationMapper">
+  <resultMap id="BaseResultMap" type="com.awei.crm.model.ContactsActivityRelation">
+    <id column="id" jdbcType="CHAR" property="id" />
+    <result column="contactsId" jdbcType="CHAR" property="contactsId" />
+    <result column="activityId" jdbcType="CHAR" property="activityId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, contactsId, activityId
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_contacts_activity_relation
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tbl_contacts_activity_relation
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.awei.crm.model.ContactsActivityRelation">
+    insert into tbl_contacts_activity_relation (id, contactsId, activityId
+      )
+    values (#{id,jdbcType=CHAR}, #{contactsId,jdbcType=CHAR}, #{activityId,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.awei.crm.model.ContactsActivityRelation">
+    insert into tbl_contacts_activity_relation
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="contactsId != null">
+        contactsId,
+      </if>
+      <if test="activityId != null">
+        activityId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="contactsId != null">
+        #{contactsId,jdbcType=CHAR},
+      </if>
+      <if test="activityId != null">
+        #{activityId,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.awei.crm.model.ContactsActivityRelation">
+    update tbl_contacts_activity_relation
+    <set>
+      <if test="contactsId != null">
+        contactsId = #{contactsId,jdbcType=CHAR},
+      </if>
+      <if test="activityId != null">
+        activityId = #{activityId,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.awei.crm.model.ContactsActivityRelation">
+    update tbl_contacts_activity_relation
+    set contactsId = #{contactsId,jdbcType=CHAR},
+      activityId = #{activityId,jdbcType=CHAR}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+</mapper>

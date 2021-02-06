@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!--指定连接数据库的JDBC 驱动包所在位置，指定到你本机的完整路径-->
+    <classPathEntry location="D:\SysFloder\SysDownload\mysql-connector-java-8.0.23\mysql-connector-java-8.0.23.jar"/>
+    <!--配置table表信息内容体，targetRuntime 指定采用MyBatis3的版本-->
+    <context id="tables" targetRuntime="MyBatis3">
+        <!--抑制生成注释，由于生成的注释都是英文的，可以不让它生成-->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+        <!--配置数据库连接信息-->
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+                        connectionURL="jdbc:mysql://192.168.222.128:3306/crm?useSSL=false&amp;serverTimezone=Hongkong&amp;characterEncoding=utf-8&amp;autoReconnect=true"
+                        userId="root"
+                        password="root">
+            <property name="nullCatalogMeansCurrent" value="true"/>
+
+        </jdbcConnection>
+
+        <!--生成model 类，targetPackage 指定 model 类的包名，targetProject 指定
+        生成的 model放在eclipse的哪个工程下面-->
+        <javaModelGenerator targetPackage="com.awei.crm.model"
+                            targetProject="src/main/java">
+            <property name="enableSubPackages" value="false"/>
+            <property name="trimStrings" value="false"/>
+        </javaModelGenerator>
+        <!--生成 MyBatis的Mapper.xml文件，targetPackage 指定 mapper.xml文件的包名，targetProject 指定生成的 mapper.xml放在 eclipse的哪个工程下面
+        -->
+        <sqlMapGenerator targetPackage="com.awei.crm.mapper"
+                         targetProject="src/main/java">
+            <property name="enableSubPackages" value="false"/>
+        </sqlMapGenerator>
+        <!--生成 MyBatis的 Mapper接口类文件,targetPackage 指定 Mapper 接口类的包名，targetProject 指定生成的 Mapper 接口放在eclipse 的哪个工程下面
+        -->
+        <javaClientGenerator type="XMLMAPPER"
+                             targetPackage="com.awei.crm.mapper"
+                             targetProject="src/main/java">
+            <property name="enableSubPackages" value="false"/>
+        </javaClientGenerator>
+        <!--数据库表名及对应的Java模型类名-->
+        <table tableName="tbl_user" domainObjectName="User"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false" >
+            <property name="useActualColumnNames" value="true" />
+        </table>
+        <table tableName="tbl_activity" domainObjectName="Activity"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false" >
+            <property name="useActualColumnNames" value="true" />
+         </table>
+        <table tableName="tbl_activity_remark" domainObjectName="ActivityRemark"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false" >
+            <property name="useActualColumnNames" value="true" />
+        </table>
+
+        <table tableName="tbl_clue_activity_relation" domainObjectName="ClueActivityRelation"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false" >
+            <property name="useActualColumnNames" value="true" />
+        </table>
+        <table tableName="tbl_clue_remark" domainObjectName="ClueRemark"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false" >
+            <property name="useActualColumnNames" value="true" />
+        </table>
+        <table tableName="tbl_contacts" domainObjectName="Contacts"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false" >
+            <property name="useActualColumnNames" value="true" />
+        </table>
+        <table tableName="tbl_contacts_activity_relation" domainObjectName="ContactsActivityRelation"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false" >
+            <property name="useActualColumnNames" value="true" />
+        </table>
+        <table tableName="tbl_contacts_remark" domainObjectName="ContactsRemark"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false" >
+            <property name="useActualColumnNames" value="true" />
+        </table>
+        <table tableName="tbl_customer" domainObjectName="Customer"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false" >
+            <property name="useActualColumnNames" value="true" />
+        </table>
+        <table tableName="tbl_customer_remark" domainObjectName="CustomerRemark"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false" >
+            <property name="useActualColumnNames" value="true" />
+        </table>
+        <table tableName="tbl_tran" domainObjectName="Tran"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false" >
+            <property name="useActualColumnNames" value="true" />
+        </table>
+        <table tableName="tbl_dic_type" domainObjectName="DicType"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false" >
+            <property name="useActualColumnNames" value="true" />
+        </table>
+        <table tableName="tbl_dic_value" domainObjectName="DicValue"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false" >
+            <property name="useActualColumnNames" value="true" />
+        </table>
+
+
+</context></generatorConfiguration>
+
+
