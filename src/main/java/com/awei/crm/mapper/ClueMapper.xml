@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace: mapper类的全限定名称-->
+<mapper namespace="com.awei.crm.mapper.ClueMapper">
+<insert id="insert" parameterType="clue">
+    insert into tbl_clue(id,fullname,appellation,owner,company,job,email,phone,website,mphone,state,source,createBy,createTime,description,contactSummary,nextContactTime,address)
+    values (#{id},#{fullname},#{appellation},#{owner},#{company},#{job},#{email},#{phone},#{website},#{mphone},#{state},#{source},#{createBy},#{createTime},#{description},#{contactSummary},#{nextContactTime},#{address})
+</insert>
+    <select id="pageList" resultType="map">
+    select c.id, c.fullname,c.company,c.phone,c.mphone,c.source,c.state,u.name owner
+    from tbl_clue c join tbl_user u  on u.id=c.owner
+     limit #{pageNo},#{pageSize}
+    </select>
+
+    <select id="pageListTotal" resultType="int">
+        select count(*)
+    from tbl_clue c join tbl_user u  on u.id=c.owner
+    </select>
+
+    <select id="getClueAndNameById" resultType="clue">
+        select
+        c.id,c.fullname,c.appellation,u.name owner,c.company,c.job,c.email,c.phone,c.website,c.mphone,c.state,c.source,c.createBy,c.createTime,c.editBy,c.editTime,c.description,c.contactSummary,c.nextContactTime,c.address
+
+
+        from tbl_user u join tbl_clue c on u.id =c.owner
+        where c.id =#{id}
+    </select>
+
+    <select id="showActivityList" resultType="activity">
+        SELECT a.id
+	,u.name owner
+	,a.name
+	,a.startDate
+	,a.endDate
+	,a.cost
+	,a.description
+	,a.createTime
+	,a.createBy
+	,a.editTime
+	,a.editBy
+	FROM tbl_user u JOIN tbl_activity a JOIN tbl_clue_activity_relation ca JOIN tbl_clue c
+
+	on ca.clueId=c.id and ca.activityId=a.id and a.owner=u.id
+	 and ca.clueId=#{id}
+
+    </select>
+</mapper>

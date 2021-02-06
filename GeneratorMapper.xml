@@ -74,6 +74,13 @@
                enableSelectByExample="false"
                selectByExampleQueryId="false" >
             <property name="useActualColumnNames" value="true" />
+        </table><table tableName="tbl_clue" domainObjectName="Clue"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false" >
+            <property name="useActualColumnNames" value="true" />
         </table>
         <table tableName="tbl_clue_remark" domainObjectName="ClueRemark"
                enableCountByExample="false"
