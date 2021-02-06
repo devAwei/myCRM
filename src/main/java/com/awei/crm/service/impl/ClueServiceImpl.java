@@ -41,10 +41,5 @@ public class ClueServiceImpl implements ClueService {
         return clueMapper.getClueAndNameById(id);
     }
 
-    @Override
-    public List<Activity> showActivityList(String id) {
-        return clueMapper.showActivityList(id);
-
-    }
 
 }

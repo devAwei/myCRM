@@ -242,4 +242,21 @@
         ,a.editBy
         from tbl_user u join  tbl_activity a on u.id=a.owner where a.id=#{id}
     </select>
+  <select id="showActivityList" resultType="Activity">
+     SELECT a.id
+	,u.name owner
+	,a.name
+	,a.startDate
+	,a.endDate
+	,a.cost
+	,a.description
+	,a.createTime
+	,a.createBy
+	,a.editTime
+	,a.editBy
+	FROM tbl_user u JOIN tbl_activity a JOIN tbl_clue_activity_relation ca JOIN tbl_clue c
+
+	on ca.clueId=c.id and ca.activityId=a.id and a.owner=u.id
+	 and ca.clueId=#{id}
+  </select>
 </mapper>

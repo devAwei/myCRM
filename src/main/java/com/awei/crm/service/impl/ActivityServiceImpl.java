@@ -54,4 +54,9 @@ public class ActivityServiceImpl implements ActivityService {
         return activityMapper.getActAndName(id);
     }
 
+    @Override
+    public List<Activity> showActivityList(String id) {
+        return activityMapper.showActivityList(id);
+    }
+
 }

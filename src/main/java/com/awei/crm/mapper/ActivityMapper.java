@@ -33,4 +33,6 @@ public interface ActivityMapper {
 
     Activity getActAndName(String id);
 
+    List<Activity> showActivityList(String id);
+
 }

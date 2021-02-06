@@ -3,6 +3,7 @@ package com.awei.crm.web.Controller;
 import com.awei.crm.model.Activity;
 import com.awei.crm.model.Clue;
 import com.awei.crm.model.User;
+import com.awei.crm.service.ActivityService;
 import com.awei.crm.service.ClueService;
 import com.awei.crm.service.UserService;
 import com.awei.crm.utils.DateTimeUtil;
@@ -31,6 +32,8 @@ public class ClueController {
 
     @Autowired
     private ClueService clueService;
+    @Autowired
+    private ActivityService activityService;
 
     @RequestMapping("/workbench/clue/getUserList.do")
     public @ResponseBody
@@ -93,7 +96,7 @@ public class ClueController {
     public @ResponseBody
     Object showActivityList(String id) {
         //刷新市场活动关联表
-        List<Activity> aclist = clueService.showActivityList(id);
+        List<Activity> aclist = activityService.showActivityList(id);
         return aclist;
     }
 }

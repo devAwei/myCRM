@@ -27,6 +27,4 @@ public interface ClueMapper {
 
     Clue getClueAndNameById(String id);
 
-    List<Activity> showActivityList(String id);
-
 }

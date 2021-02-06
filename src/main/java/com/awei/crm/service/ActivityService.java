@@ -26,4 +26,6 @@ public interface ActivityService {
 
     Activity getAcvAndName(String id);
 
+    List<Activity> showActivityList(String id);
+
 }

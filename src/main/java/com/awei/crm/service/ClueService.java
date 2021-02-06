@@ -21,6 +21,4 @@ public interface ClueService {
 
     Clue getClueAndNameById(String id);
 
-    List<Activity> showActivityList(String id);
-
 }
