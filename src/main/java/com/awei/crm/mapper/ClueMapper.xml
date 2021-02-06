@@ -28,4 +28,8 @@
         from tbl_user u join tbl_clue c on u.id =c.owner
         where c.id =#{id}
     </select>
+
+    <delete id="unBund">
+        DELETE from tbl_clue_activity_relation WHERE activityId =#{id}
+    </delete>
 </mapper>

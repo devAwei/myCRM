@@ -56,6 +56,93 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 		//页面加载完毕 ，加载市场活动列表
 		showActivityList();
 
+		//给 添加关联 绑定事件
+		$("#createBund").click(function () {
+			// alert(123);
+			//打开模态窗口
+			$("#bundModal").modal("show");
+		});
+		//搜索框回车键 绑定事件
+		$("#queryInput").keydown(function (event) {
+
+			if (event.keyCode == 13) {
+				$.ajax({
+					url: "workbench/clue/activityPageList.do",
+					data: {
+						"pageNo": 1,
+						"pageSize": 10,
+						"name": $.trim($("#queryInput").val()),
+						"clueId":"${clue.id}"
+					},
+					type: "get",
+					dataType:"json",
+					success: function (data) {
+						// data:{[市场活动1],[],][]}
+						var html = "";
+						$.each(data, function (i, e) {
+							html+='	<tr>';
+							html+='	<td><input name="xz" value="'+e.id+'" type="checkbox"/></td>';
+							html+='	<td>'+e.name+'</td>';
+							html+='	<td>'+e.startDate+'</td>';
+							html+='	<td>'+e.endDate+'</td>';
+							html+='	<td>'+e.owner+'</td>';
+							html+='	</tr>';
+						});
+						$("#acmodalTbody").html(html);
+					}
+				});
+				/*
+                            模态窗口，默认敲回车 会清空当前页面数据 直接return 给这个事件禁用掉 妙！！！
+                             */
+				return false;
+			}
+
+
+		});
+		//给全选绑定事件
+		$("#qx").click(function () {
+			// $("input[name=xz]").prop("checked", this.checked);
+			$("input[name=xz]").prop("checked", this.checked);
+		});
+		//给 saveBtn 添加事件
+		$("#saveBtn").click(function () {
+
+			$xz = $("input[name=xz]:checked");
+			if ($xz.length == 0) {
+				alert("请选择要关联的市场活动");
+			}else {
+				// workbench/clue/saveActivity.do?cId=xxx&aId=xxx&aId=xxx
+				var parm = "cId=${clue.id}&";
+				for (var i = 0; i < $xz.length; i++) {
+					parm += "aId=" + $($xz[i]).val();
+					if(i<$xz.length-1)
+						parm += "&";
+
+				}
+				// alert(parm);
+				$.ajax({
+					url:"workbench/clue/saveActivity.do",
+					data: parm,
+					type: "post",
+					dataType:"json",
+					success: function (data) {
+						// 关闭模态窗口
+						if (data.success) {
+							$("#bundModal").modal("hide");
+							showActivityList();
+						}else alert("添加失败");
+
+					}
+				});
+
+			}
+
+		});
+		//给 取消按钮 添加事件
+		$("#cancelModalBtn").click(function () {
+			$("#bundModal").modal("hide");
+		});
+
 	});
 	//刷新市场活动列表方法
 	function showActivityList() {
@@ -80,18 +167,37 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 					html+='<td>'+e.owner+'</td>';
 					html+='<td><a href="javascript:void(0);" onclick="unBund(\''+e.id+'\')" yle="text-decoration: none;"><span class="glyphicon glyphicon-remove"></span>解除关联</a></td>';
 					html+='</tr>';
+
 				});
+
 				$("#acTbody").html(html);
 
 
 			}
 		});
 	}
-
+	//接触关联 被点击触发函数
 	function unBund(id) {
-		alert(id);
+		// alert(id);
+		//id is ActivityId
+		$.ajax({
+			url: "workbench/clue/unbund.do",
+			data: {
+				"id":id
+			},
+			type:"post",
+			dataType: "json",
+			success: function (data) {
+				// data: {"success":true/false}
+				if (data.success) {
+					//删除成功 flush list
+					showActivityList();
+				}else alert("删除失败");
+			}
+		});
 	}
-	
+
+
 </script>
 
 </head>
@@ -111,15 +217,15 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 					<div class="btn-group" style="position: relative; top: 18%; left: 8px;">
 						<form class="form-inline" role="form">
 						  <div class="form-group has-feedback">
-						    <input type="text" class="form-control" style="width: 300px;" placeholder="请输入市场活动名称，支持模糊查询">
-						    <span class="glyphicon glyphicon-search form-control-feedback"></span>
+						    <input id="queryInput" type="text" class="form-control" style="width: 300px;" placeholder="请输入市场活动名称，支持模糊查询">
+						    <span  class="glyphicon glyphicon-search form-control-feedback"></span>
 						  </div>
 						</form>
 					</div>
 					<table id="activityTable" class="table table-hover" style="width: 900px; position: relative;top: 10px;">
 						<thead>
 							<tr style="color: #B3B3B3;">
-								<td><input type="checkbox"/></td>
+								<td><input id="qx" type="checkbox"/></td>
 								<td>名称</td>
 								<td>开始日期</td>
 								<td>结束日期</td>
@@ -127,8 +233,8 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 								<td></td>
 							</tr>
 						</thead>
-						<tbody>
-							<tr>
+						<tbody id="acmodalTbody">
+							<%--<tr>
 								<td><input type="checkbox"/></td>
 								<td>发传单</td>
 								<td>2020-10-10</td>
@@ -141,13 +247,14 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 								<td>2020-10-10</td>
 								<td>2020-10-20</td>
 								<td>zhangsan</td>
-							</tr>
+							</tr>--%>
 						</tbody>
 					</table>
 				</div>
+				<div id="activityPage"></div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-					<button type="button" class="btn btn-primary" data-dismiss="modal">关联</button>
+					<button type="button" class="btn btn-default" id="cancelModalBtn">取消</button>
+					<button type="button" id="saveBtn" class="btn btn-primary" >关联</button>
 				</div>
 			</div>
 		</div>
@@ -313,7 +420,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 	<div style="position: relative; top: 35px; left: 10px;">
 		<a href="javascript:void(0);" onclick="window.history.back();"><span class="glyphicon glyphicon-arrow-left" style="font-size: 20px; color: #DDDDDD"></span></a>
 	</div>
-	
+
 	<!-- 大标题 -->
 	<div style="position: relative; left: 40px; top: -30px;">
 		<div class="page-header">
@@ -325,7 +432,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 			<button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-minus"></span> 删除</button>
 		</div>
 	</div>
-	
+
 	<!-- 详细信息 -->
 	<div style="position: relative; top: -70px;">
 		<div style="position: relative; left: 40px; height: 30px;">
@@ -411,13 +518,13 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
             <div style="height: 1px; width: 850px; background: #D5D5D5; position: relative; top: -20px;"></div>
         </div>
 	</div>
-	
+
 	<!-- 备注 -->
 	<div style="position: relative; top: 40px; left: 40px;">
 		<div class="page-header">
 			<h4>备注</h4>
 		</div>
-		
+
 		<!-- 备注1 -->
 		<div class="remarkDiv" style="height: 60px;">
 			<img title="zhangsan" src="image/user-thumbnail.png" style="width: 30px; height:30px;">
@@ -431,7 +538,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 				</div>
 			</div>
 		</div>
-		
+
 		<!-- 备注2 -->
 		<div class="remarkDiv" style="height: 60px;">
 			<img title="zhangsan" src="image/user-thumbnail.png" style="width: 30px; height:30px;">
@@ -445,7 +552,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 				</div>
 			</div>
 		</div>
-		
+
 		<div id="remarkDiv" style="background-color: #E6E6E6; width: 870px; height: 90px;">
 			<form role="form" style="position: relative;top: 10px; left: 10px;">
 				<textarea id="remark" class="form-control" style="width: 850px; resize : none;" rows="2"  placeholder="添加备注..."></textarea>
@@ -456,7 +563,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 			</form>
 		</div>
 	</div>
-	
+
 	<!-- 市场活动 -->
 	<div>
 		<div style="position: relative; top: 60px; left: 40px;">
@@ -492,14 +599,14 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 					</tbody>
 				</table>
 			</div>
-			
+
 			<div>
-				<a href="javascript:void(0);" data-toggle="modal" data-target="#bundModal" style="text-decoration: none;"><span class="glyphicon glyphicon-plus"></span>关联市场活动</a>
+				<a href="javascript:void(0);" id="createBund" style="text-decoration: none;"><span class="glyphicon glyphicon-plus"></span>关联市场活动</a>
 			</div>
 		</div>
 	</div>
-	
-	
+
+
 	<div style="height: 200px;"></div>
 </body>
 </html>

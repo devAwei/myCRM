@@ -2,8 +2,10 @@ package com.awei.crm.web.Controller;
 
 import com.awei.crm.model.Activity;
 import com.awei.crm.model.Clue;
+import com.awei.crm.model.ClueActivityRelation;
 import com.awei.crm.model.User;
 import com.awei.crm.service.ActivityService;
+import com.awei.crm.service.ClueActivityRelationService;
 import com.awei.crm.service.ClueService;
 import com.awei.crm.service.UserService;
 import com.awei.crm.utils.DateTimeUtil;
@@ -35,6 +37,8 @@ public class ClueController {
     @Autowired
     private ActivityService activityService;
 
+    @Autowired
+    private ClueActivityRelationService carService;
     @RequestMapping("/workbench/clue/getUserList.do")
     public @ResponseBody
     Object getUserListDo() {
@@ -86,17 +90,66 @@ public class ClueController {
     }
 
     /**
-    * @Description:
-    * @Param: [id]  传过来的 客户的  id  刘冬冬
-    * @return: java.lang.Object
-    * @Author: Awei
-    * @Date: 2021/2/6
-    */
+     * @Description:
+     * @Param: [id]  传过来的 客户的  id  刘冬冬
+     * @return: java.lang.Object
+     * @Author: Awei
+     * @Date: 2021/2/6
+     */
     @RequestMapping("/workbench/clue/showActivityList.do")
     public @ResponseBody
     Object showActivityList(String id) {
         //刷新市场活动关联表
         List<Activity> aclist = activityService.showActivityList(id);
         return aclist;
+    }
+
+    @PostMapping("/workbench/clue/unbund.do")
+    public @ResponseBody
+    Object unBundDo(String id) {
+        Map<String, Object> map = new HashMap<>();
+        int num = clueService.unBund(id);
+        if (num > 0) {
+            map.put("success", true);
+        } else map.put("success", false);
+        return map;
+    }
+
+
+    @RequestMapping(value = "/workbench/clue/activityPageList.do")
+    public @ResponseBody
+    Object pageList(String name, Integer pageNo, Integer pageSize, String clueId) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("pageNo", (pageNo - 1) * pageSize);
+        map.put("pageSize", pageSize);
+        map.put("name", name);
+        map.put("clueId", clueId);
+        List<Map<String, Object>> alist = activityService.getAct_ActIdNotInClue(map);
+        return alist;
+    }
+
+    @RequestMapping("/workbench/clue/saveActivity.do")
+    public @ResponseBody
+    Object saveActivityDo(String cId, String[] aId) {
+        Map<String, Object> map = new HashMap<>();
+        int count = 0;
+        for (String id : aId) {
+            ClueActivityRelation car = new ClueActivityRelation();
+            car.setId(UUIDUtil.getUUID());
+            car.setClueId(cId);
+            car.setActivityId(id);
+            int re = carService.updateRelation(car);
+            if (re > 0) {
+                count++;
+            }
+        }
+        System.out.println("count" + count);
+        System.out.println("aid length"+aId.length);
+
+
+        if (count == aId.length) {
+            map.put("success", true);
+        }else map.put("success", false);
+        return map;
     }
 }

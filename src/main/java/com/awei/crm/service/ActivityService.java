@@ -28,4 +28,6 @@ public interface ActivityService {
 
     List<Activity> showActivityList(String id);
 
+    List<Map<String, Object>> getAct_ActIdNotInClue(Map<String, Object> map);
+
 }

@@ -259,4 +259,11 @@
 	on ca.clueId=c.id and ca.activityId=a.id and a.owner=u.id
 	 and ca.clueId=#{id}
   </select>
+
+
+  <select id="getAct_ActIdNotInClue" resultType="activity">
+    select a.id,u.name owner,a.startDate,a.endDate,a.name
+    from tbl_activity a join tbl_user u
+		 on u.id=a.owner where a.name like '%' #{name} '%' and a.id not in (SELECT activityId from tbl_clue_activity_relation where clueId=#{clueId})
+  </select>
 </mapper>

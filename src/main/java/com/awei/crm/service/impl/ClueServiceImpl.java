@@ -41,5 +41,10 @@ public class ClueServiceImpl implements ClueService {
         return clueMapper.getClueAndNameById(id);
     }
 
+    @Override
+    public int unBund(String id) {
+        return clueMapper.unBund(id);
+    }
+
 
 }

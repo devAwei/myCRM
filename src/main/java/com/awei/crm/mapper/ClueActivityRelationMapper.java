@@ -14,4 +14,6 @@ public interface ClueActivityRelationMapper {
     int updateByPrimaryKeySelective(ClueActivityRelation record);
 
     int updateByPrimaryKey(ClueActivityRelation record);
+
+    int updateRelation(String cId, String id);
 }

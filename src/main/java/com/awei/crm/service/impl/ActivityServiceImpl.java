@@ -59,4 +59,9 @@ public class ActivityServiceImpl implements ActivityService {
         return activityMapper.showActivityList(id);
     }
 
+    @Override
+    public List<Map<String, Object>> getAct_ActIdNotInClue(Map<String, Object> map) {
+        return activityMapper.getAct_ActIdNotInClue(map);
+    }
+
 }

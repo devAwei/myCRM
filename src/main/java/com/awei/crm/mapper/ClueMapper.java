@@ -27,4 +27,5 @@ public interface ClueMapper {
 
     Clue getClueAndNameById(String id);
 
+    int unBund(String id);
 }

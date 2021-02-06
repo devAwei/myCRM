@@ -21,4 +21,5 @@ public interface ClueService {
 
     Clue getClueAndNameById(String id);
 
+    int unBund(String id);
 }
