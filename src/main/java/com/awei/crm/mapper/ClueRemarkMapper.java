@@ -2,6 +2,8 @@ package com.awei.crm.mapper;
 
 import com.awei.crm.model.ClueRemark;
 
+import java.util.List;
+
 public interface ClueRemarkMapper {
     int deleteByPrimaryKey(String id);
 
@@ -16,5 +18,7 @@ public interface ClueRemarkMapper {
     int updateByPrimaryKey(ClueRemark record);
 
     int deleteByClueId(String clueId);
+
+    List<ClueRemark> selectByClueId(String clueId);
 
 }

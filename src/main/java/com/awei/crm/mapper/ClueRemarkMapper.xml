@@ -128,4 +128,9 @@
   <delete id="deleteByClueId">
     DELETE FROM tbl_clue_remark WHERE clueId=#{clueId}
   </delete>
+  <select id="selectByClueId" resultType="clueRemarkMapper">
+    select
+    <include refid="Base_Column_List"/>
+    from   tbl_clue_remark where  clueId=#{id}
+  </select>
 </mapper>

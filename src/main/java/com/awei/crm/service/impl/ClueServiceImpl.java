@@ -116,28 +116,33 @@ public class ClueServiceImpl implements ClueService {
         contacts.setCustomerId(customer.getId());
         contactsMapper.insert(contacts);
         //(4) 线索备注转换到客户备注以及联系人备注
-        ClueRemark clueRemark = clueRemarkMapper.selectByPrimaryKey(clueId);
-        if (null != clueRemark) {
-            CustomerRemark customerRemark = new CustomerRemark();
-            ContactsRemark contactsRemark = new ContactsRemark();
-            contactsRemark.setId(UUIDUtil.getUUID());
-            customerRemark.setId(UUIDUtil.getUUID());
+        List<ClueRemark> clRmkList= clueRemarkMapper.selectByClueId(clueId);
+        if (null != clRmkList) {
+            for (ClueRemark clueRemark : clRmkList) {
+                CustomerRemark customerRemark = new CustomerRemark();
+                ContactsRemark contactsRemark = new ContactsRemark();
+                contactsRemark.setId(UUIDUtil.getUUID());
+                customerRemark.setId(UUIDUtil.getUUID());
 
-            contactsRemark.setNoteContent(clueRemark.getNoteContent());
-            customerRemark.setNoteContent(clueRemark.getNoteContent());
+                contactsRemark.setNoteContent(clueRemark.getNoteContent());
+                customerRemark.setNoteContent(clueRemark.getNoteContent());
 
-            contactsRemark.setContactsId(contacts.getId());
-            customerRemark.setCustomerId(customer.getId());
+                contactsRemark.setContactsId(contacts.getId());
+                customerRemark.setCustomerId(customer.getId());
 
-            contactsRemark.setCreateBy(user.getId());
-            customerRemark.setCreateBy(user.getId());
-            contactsRemark.setCreateTime(DateTimeUtil.getSysTime());
-            customerRemark.setCreateTime(DateTimeUtil.getSysTime());
+                contactsRemark.setCreateBy(user.getId());
+                customerRemark.setCreateBy(user.getId());
+                contactsRemark.setCreateTime(DateTimeUtil.getSysTime());
+                customerRemark.setCreateTime(DateTimeUtil.getSysTime());
 
-            contactsRemark.setEditFlag("0");
-            customerRemark.setEditFlag("0");
-            contactsMapper.insert(contacts);
-            customerRemarkMapper.insert(customerRemark);
+                contactsRemark.setEditFlag("0");
+                customerRemark.setEditFlag("0");
+                customerRemarkMapper.insert(customerRemark);
+                contactsRemarkMapper.insert(contactsRemark);
+            }
+            //干掉与该条线索相关的备注
+            clueRemarkMapper.deleteByClueId(clueId);
+
         }
 
 
