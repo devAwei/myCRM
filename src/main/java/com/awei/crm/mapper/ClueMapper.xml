@@ -10,7 +10,7 @@
     values (#{id},#{fullname},#{appellation},#{owner},#{company},#{job},#{email},#{phone},#{website},#{mphone},#{state},#{source},#{createBy},#{createTime},#{description},#{contactSummary},#{nextContactTime},#{address})
 </insert>
     <select id="pageList" resultType="map">
-    select c.id, c.fullname,c.company,c.phone,c.mphone,c.source,c.state,u.name owner
+    select c.id, c.fullname,c.company,c.phone,c.mphone,c.source,c.state,u.name owner,c.appellation
     from tbl_clue c join tbl_user u  on u.id=c.owner
      limit #{pageNo},#{pageSize}
     </select>

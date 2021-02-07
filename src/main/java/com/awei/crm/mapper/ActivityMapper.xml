@@ -185,7 +185,7 @@
         and   a.endDate &lt;=#{endDate}
       </if>
     </where>
-    order by a.name desc ,a.startDate desc,a.endDate
+    order by a.startDate desc,a.endDate
     limit #{pageNo},#{pageSize}
   </select>
 

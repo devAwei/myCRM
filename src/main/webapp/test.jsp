@@ -17,6 +17,23 @@
 
         }
     });
+
+
+    //打开模态窗口	输入框获取焦点
+    $('#bundModal').on('shown.bs.modal', function () {
+        $('#queryInput').focus();
+    });
+    $('#bundModal').modal('show');
+
+    //页面加载完成 添加时间控件
+    $(".time").datetimepicker({
+        minView: "month",
+        language: 'zh-CN',
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+        todayBtn: true,
+        pickerPosition: "bottom-left"
+    });
 </script>
 <body>
 

@@ -94,7 +94,7 @@
   <select id="getValuesByTypeCode" resultType="dicValue">
     select
     <include refid="Base_Column_List"/>
-    from tbl_dic_value where typeCode=#{code}
+    from tbl_dic_value where typeCode=#{code} order by orderNo
   </select>
 
 

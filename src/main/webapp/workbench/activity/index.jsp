@@ -97,6 +97,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 							$("#activityForm")[0].reset();
 							//3、关闭添加操作的模态窗口
 							$("#createActivityModal").modal("hide");
+							pageList(1,$("#activityPage").bs_pagination('getOption', 'rowsPerPage'));
 						} else {
 							alert("添加市场活动失败");
 						}

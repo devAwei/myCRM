@@ -130,7 +130,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 				$.each(data.dataList, function (i, n) {
 				html+='	<tr>';
 				html+='	<td><input type="checkbox" /></td> ';
-				html+='	<td><a style="text-decoration: none; cursor: pointer;" onclick="window.location.href=\'workbench/clue/detail.do?id='+n.id+'\';">'+n.fullname+'</a></td>';
+				html+='	<td><a style="text-decoration: none; cursor: pointer;" onclick="window.location.href=\'workbench/clue/detail.do?id='+n.id+'\';">'+n.fullname+n.appellation+'</a></td>';
 				html+='	<td>'+n.company+'</td>';
 				html+='	<td>'+n.phone+'</td>';
 				html+='	<td>'+n.mphone+'</td>';
@@ -167,7 +167,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 			}
 		});
 	}
-	
+
 </script>
 </head>
 <body>
