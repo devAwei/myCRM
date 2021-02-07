@@ -28,4 +28,9 @@ public interface ClueMapper {
     Clue getClueAndNameById(String id);
 
     int unBund(String id);
+
+    int deleteByPrimaryKey(String clueId);
+
+    Clue selectByPrimaryKey(String id);
+
 }

@@ -69,5 +69,13 @@
     where id = #{id,jdbcType=CHAR}
   </update>
 
+  <delete id="deleteByClueId" >
+    DELETE FROM tbl_clue_activity_relation WHERE clueId=#{clueId}
+  </delete>
+  <select id="selectByClueId" resultType="clueActivityRelation">
+    select
+    <include refid="Base_Column_List"/>
+    from tbl_clue_activity_relation where clueId=#{clueId}
 
+  </select>
 </mapper>

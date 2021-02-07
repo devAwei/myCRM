@@ -37,4 +37,6 @@ public interface ActivityMapper {
 
     List<Map<String, Object>> getAct_ActIdNotInClue(Map<String, Object> map);
 
+    List<Map<String, Object>> getAct_ActIdInClue(Map<String, Object> map);
+
 }

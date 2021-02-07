@@ -1,13 +1,7 @@
 package com.awei.crm.web.Controller;
 
-import com.awei.crm.model.Activity;
-import com.awei.crm.model.Clue;
-import com.awei.crm.model.ClueActivityRelation;
-import com.awei.crm.model.User;
-import com.awei.crm.service.ActivityService;
-import com.awei.crm.service.ClueActivityRelationService;
-import com.awei.crm.service.ClueService;
-import com.awei.crm.service.UserService;
+import com.awei.crm.model.*;
+import com.awei.crm.service.*;
 import com.awei.crm.utils.DateTimeUtil;
 import com.awei.crm.utils.UUIDUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +33,9 @@ public class ClueController {
 
     @Autowired
     private ClueActivityRelationService carService;
+
+    @Autowired
+    private TranService tranService;
     @RequestMapping("/workbench/clue/getUserList.do")
     public @ResponseBody
     Object getUserListDo() {
@@ -144,12 +141,42 @@ public class ClueController {
             }
         }
         System.out.println("count" + count);
-        System.out.println("aid length"+aId.length);
+        System.out.println("aid length" + aId.length);
 
 
         if (count == aId.length) {
             map.put("success", true);
-        }else map.put("success", false);
+        } else map.put("success", false);
         return map;
     }
+
+    @RequestMapping(value = "/workbench/clue/getActivityClueHave.do")
+    public @ResponseBody
+    Object getActivityClueHave(String name, Integer pageNo, Integer pageSize, String clueId) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("pageNo", (pageNo - 1) * pageSize);
+        map.put("pageSize", pageSize);
+        map.put("name", name);
+        map.put("clueId", clueId);
+        List<Map<String, Object>> alist = activityService.getAct_ActIdtInClue(map);
+        return alist;
+    }
+
+    @RequestMapping("/workbench/clue/convert.do")
+    public String convertClue(Tran tran, String clueId,String flag,HttpServletRequest request) {
+        boolean result = false;
+        User user = (User) request.getSession().getAttribute("user");
+        if ("flag".equals(flag)) {
+            //标识 勾选了 创建交易 干掉 一条线索 by clueId，并在交易表新增一条记录
+            result = clueService.convert(tran, user,clueId);
+
+        } else {
+            tran = null;
+            result = clueService.convert(tran, user,clueId);
+        }
+        if (result)
+            return "workbench/clue/index";
+        return "404";
+    }
+
 }

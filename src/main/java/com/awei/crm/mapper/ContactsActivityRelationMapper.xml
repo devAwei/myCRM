@@ -68,4 +68,7 @@
       activityId = #{activityId,jdbcType=CHAR}
     where id = #{id,jdbcType=CHAR}
   </update>
+  <delete id="deleteByClueId">
+    DELETE FROM tbl_clue_activity_relation WHERE clueId=#{clueId}
+  </delete>
 </mapper>

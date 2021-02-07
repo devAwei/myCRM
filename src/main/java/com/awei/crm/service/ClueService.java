@@ -2,6 +2,8 @@ package com.awei.crm.service;
 
 import com.awei.crm.model.Activity;
 import com.awei.crm.model.Clue;
+import com.awei.crm.model.Tran;
+import com.awei.crm.model.User;
 
 import java.util.List;
 import java.util.Map;
@@ -22,4 +24,9 @@ public interface ClueService {
     Clue getClueAndNameById(String id);
 
     int unBund(String id);
+
+    int deleteByPrimaryKey(String clueId);
+
+    boolean convert(Tran tran, User user,String id);
+
 }

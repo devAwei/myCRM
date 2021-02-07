@@ -4,7 +4,13 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--namespace: mapper类的全限定名称-->
+
 <mapper namespace="com.awei.crm.mapper.ClueMapper">
+
+    <sql id="Base_Column_List">
+    id,fullname,appellation,owner,company,job,email,phone,website,mphone,state,source,createBy,createTime,editBy,editTime,description,contactSummary,nextContactTime,address
+
+  </sql>
 <insert id="insert" parameterType="clue">
     insert into tbl_clue(id,fullname,appellation,owner,company,job,email,phone,website,mphone,state,source,createBy,createTime,description,contactSummary,nextContactTime,address)
     values (#{id},#{fullname},#{appellation},#{owner},#{company},#{job},#{email},#{phone},#{website},#{mphone},#{state},#{source},#{createBy},#{createTime},#{description},#{contactSummary},#{nextContactTime},#{address})
@@ -32,4 +38,14 @@
     <delete id="unBund">
         DELETE from tbl_clue_activity_relation WHERE activityId =#{id}
     </delete>
+
+    <delete id="deleteByPrimaryKey">
+        DELETE FROM tbl_clue WHERE id=#{id}
+    </delete>
+    <select id="selectByPrimaryKey" resultType="clue">
+        select
+        <include refid="Base_Column_List" />
+        from tbl_clue
+        where id = #{id}
+    </select>
 </mapper>

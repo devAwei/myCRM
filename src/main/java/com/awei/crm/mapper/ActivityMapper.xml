@@ -266,4 +266,11 @@
     from tbl_activity a join tbl_user u
 		 on u.id=a.owner where a.name like '%' #{name} '%' and a.id not in (SELECT activityId from tbl_clue_activity_relation where clueId=#{clueId})
   </select>
+
+  <select id="getAct_ActIdInClue" resultType="activity">
+    select a.id,u.name owner,a.startDate,a.endDate,a.name
+    from tbl_activity a join tbl_user u
+		 on u.id=a.owner where a.name like '%' #{name} '%' and a.id  in (SELECT activityId from tbl_clue_activity_relation where clueId=#{clueId})
+  </select>
+
 </mapper>

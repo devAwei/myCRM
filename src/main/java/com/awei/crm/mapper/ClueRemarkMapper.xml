@@ -125,4 +125,7 @@
       clueId = #{clueId,jdbcType=CHAR}
     where id = #{id,jdbcType=CHAR}
   </update>
+  <delete id="deleteByClueId">
+    DELETE FROM tbl_clue_remark WHERE clueId=#{clueId}
+  </delete>
 </mapper>

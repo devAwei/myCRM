@@ -185,4 +185,9 @@
       address = #{address,jdbcType=VARCHAR}
     where id = #{id,jdbcType=CHAR}
   </update>
+
+  <select id="selectByCompany" resultType="customer">
+    select <include refid="Base_Column_List"></include>
+    from tbl_customer where name =#{id}
+  </select>
 </mapper>

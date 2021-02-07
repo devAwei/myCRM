@@ -30,4 +30,6 @@ public interface ActivityService {
 
     List<Map<String, Object>> getAct_ActIdNotInClue(Map<String, Object> map);
 
+    List<Map<String, Object>> getAct_ActIdtInClue(Map<String, Object> map);
+
 }
