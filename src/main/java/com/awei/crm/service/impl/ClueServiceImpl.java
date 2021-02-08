@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -83,7 +84,7 @@ public class ClueServiceImpl implements ClueService {
     @Transactional(
 
             propagation = Propagation.REQUIRED,
-            rollbackFor = {NullPointerException.class,CULDException.class},
+            rollbackFor = {NullPointerException.class,CULDException.class, SQLException.class},
             isolation = Isolation.DEFAULT
     )
     @Override
@@ -234,6 +235,4 @@ public class ClueServiceImpl implements ClueService {
         }
         return true;
     }
-
-
 }

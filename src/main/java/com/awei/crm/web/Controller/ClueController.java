@@ -169,15 +169,13 @@ public class ClueController {
         User user = (User) request.getSession().getAttribute("user");
         if ("flag".equals(flag)) {
             //标识 勾选了 创建交易 干掉 一条线索 by clueId，并在交易表新增一条记录
-            result = clueService.convert(tran, user,clueId);
+             clueService.convert(tran, user,clueId);
 
         } else {
             tran = null;
-            result = clueService.convert(tran, user,clueId);
+            clueService.convert(tran, user,clueId);
         }
-        if (result)
-            return "workbench/clue/index";
-        return "404";
+        return "workbench/clue/index";
     }
 
 }

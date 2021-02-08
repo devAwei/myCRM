@@ -1,5 +1,6 @@
 package com.awei.crm.handler;
 
+import com.awei.crm.exception.CULDException;
 import com.awei.crm.exception.LoginException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -24,5 +25,10 @@ public class GlobalExceptionHandler {
         map.put("msg", e.getMessage());
         map.put("success", false);
         return map;
+    }
+
+    @ExceptionHandler(CULDException.class)
+    public String convertClue(Exception e) {
+        return "404";
     }
 }
