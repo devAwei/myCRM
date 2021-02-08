@@ -1,5 +1,6 @@
 package com.awei.crm.web.Controller;
 
+import com.awei.crm.exception.CULDException;
 import com.awei.crm.model.*;
 import com.awei.crm.service.*;
 import com.awei.crm.utils.DateTimeUtil;
@@ -163,7 +164,7 @@ public class ClueController {
     }
 
     @RequestMapping("/workbench/clue/convert.do")
-    public String convertClue(Tran tran, String clueId,String flag,HttpServletRequest request) {
+    public String convertClue(Tran tran, String clueId,String flag,HttpServletRequest request) throws CULDException {
         boolean result = false;
         User user = (User) request.getSession().getAttribute("user");
         if ("flag".equals(flag)) {

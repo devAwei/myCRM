@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <!--spring 配置文件 service mapper 工具类对象-->
     <!--组件扫描器-->
@@ -35,5 +35,12 @@
     <!--声明service 的注解 @service 扫描的位置-->
     <context:component-scan base-package="com.awei.crm.service"/>
 
-
+    <!--使用spring的事务管理-->
+    <!--声明事务管理器-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <!--告诉连接的是哪个数据库-->
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <!--开启事务注解驱动，告诉spring 使用注解管理事务，创建代理对象-->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
 </beans>

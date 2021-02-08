@@ -1,5 +1,6 @@
 package com.awei.crm.service;
 
+import com.awei.crm.exception.CULDException;
 import com.awei.crm.model.Activity;
 import com.awei.crm.model.Clue;
 import com.awei.crm.model.Tran;
@@ -27,6 +28,6 @@ public interface ClueService {
 
     int deleteByPrimaryKey(String clueId);
 
-    boolean convert(Tran tran, User user,String id);
+    boolean convert(Tran tran, User user,String id) throws CULDException;
 
 }
