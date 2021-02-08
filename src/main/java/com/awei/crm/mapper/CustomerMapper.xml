@@ -190,4 +190,25 @@
     select <include refid="Base_Column_List"></include>
     from tbl_customer where name =#{id}
   </select>
+  <select id="countCustomer" resultType="int">
+    SELECT COUNT(*) FROM tbl_customer
+  </select>
+  <select id="selectCustomer" resultType="customer">
+    SELECT
+            a.id
+        ,u.name owner
+        ,a.name
+        ,a.website
+        ,a.phone
+        ,a.createBy
+        ,a.createTime
+        ,a.editBy
+        ,a.editTime
+        ,a.contactSummary
+        ,a.nextContactTime
+        ,a.description
+        ,a.address
+
+    FROM tbl_customer a join tbl_user u on u.id=a.owner LIMIT #{pageNo},#{pageSize}
+  </select>
 </mapper>
