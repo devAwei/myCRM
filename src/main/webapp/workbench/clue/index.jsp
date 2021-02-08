@@ -120,9 +120,9 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 			dataType:"json",
 			success: function (data) {
 				/*
-                * 	data [{市场活动1},{市场活动2},{市场活动3}....]
+                * 	data [{线索},{},{}....]
                 * 	分页插件 数据总条数
-                * 	{"total":100,"dataList": [{市场活动1},{市场活动2},{市场活动3}....] }
+                * 	{"total":100,"dataList": [{线索},{},{}] }
                 *
                 * */
 
