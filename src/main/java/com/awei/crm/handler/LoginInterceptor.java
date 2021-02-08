@@ -25,7 +25,9 @@ public class LoginInterceptor implements HandlerInterceptor {
         System.out.println(request.getRequestURI());
 
         System.out.println("intercepter success!");
-        response.sendRedirect("/login.jsp");
+        String contextPath = request.getContextPath();
+        System.out.println(contextPath);
+        response.sendRedirect(contextPath + "/login.jsp");
         return false;
     }
 
