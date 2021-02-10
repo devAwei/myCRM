@@ -1,6 +1,7 @@
 package com.awei.crm.service;
 
 import com.awei.crm.exception.CULDException;
+import com.awei.crm.exception.NullCustomerNameList;
 
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,7 @@ import java.util.Map;
 public interface CustomerService {
 
 
-    Map<String, Object> pageList(Integer pageNo,Integer pageSize) throws CULDException;
+    Map<String, Object> pageList(Integer pageNo, Integer pageSize) throws CULDException;
+    List<String> getCustomerNameList(String name) throws NullCustomerNameList;
 
 }

@@ -2,6 +2,7 @@ package com.awei.crm.handler;
 
 import com.awei.crm.exception.CULDException;
 import com.awei.crm.exception.LoginException;
+import com.awei.crm.exception.NullCustomerNameList;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -30,5 +31,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(CULDException.class)
     public String convertClue(Exception e) {
         return "404";
+    }
+
+    @ExceptionHandler(NullCustomerNameList.class)
+    public @ResponseBody
+    Object nullCusttomerList() {
+        return "";
     }
 }

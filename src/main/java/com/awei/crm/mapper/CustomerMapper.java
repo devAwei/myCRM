@@ -24,4 +24,7 @@ public interface CustomerMapper {
 
     List<Customer> selectCustomer(@Param("pageNo")Integer pageNo,@Param("pageSize") Integer pageSize);
 
+    List<String> getCustomerNameList(@Param("name") String name);
+
+
 }

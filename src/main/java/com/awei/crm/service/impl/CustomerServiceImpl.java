@@ -1,6 +1,7 @@
 package com.awei.crm.service.impl;
 
 import com.awei.crm.exception.CULDException;
+import com.awei.crm.exception.NullCustomerNameList;
 import com.awei.crm.mapper.CustomerMapper;
 import com.awei.crm.model.Customer;
 import com.awei.crm.service.CustomerService;
@@ -40,4 +41,14 @@ public class CustomerServiceImpl implements CustomerService {
         return reMap;
     }
 
+    //////////////////////////////////////////////////////////////////////
+    @Override
+    public List<String> getCustomerNameList(String name) throws NullCustomerNameList {
+        List<String> nameList = customerMapper.getCustomerNameList(name);
+        if (null == nameList) {
+            throw new NullCustomerNameList("没有客户");
+        }
+
+        return nameList;
+    }
 }

@@ -211,4 +211,7 @@
 
     FROM tbl_customer a join tbl_user u on u.id=a.owner LIMIT #{pageNo},#{pageSize}
   </select>
+  <select id="getCustomerNameList" resultType="String">
+    SELECT name FROM tbl_customer where name like #{name} '%'
+  </select>
 </mapper>
