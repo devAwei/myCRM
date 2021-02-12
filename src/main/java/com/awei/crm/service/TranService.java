@@ -1,9 +1,8 @@
 package com.awei.crm.service;
 
-import com.awei.crm.exception.NullCustomerNameList;
+import com.awei.crm.exception.CULDException;
 import com.awei.crm.model.Tran;
-
-import java.util.List;
+import com.awei.crm.model.User;
 
 /**
  * @program: CRM_bak
@@ -13,5 +12,5 @@ import java.util.List;
 public interface TranService {
 
 
-
+    boolean saveTran(Tran tran, User user) throws CULDException;
 }
