@@ -72,6 +72,8 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 		$("#saveBtn").click(function () {
 			$("#saveForm").submit();
 		});
+
+
 	});
 
 
@@ -262,14 +264,14 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 			</div>
 			<label for="create-activitySrc" class="col-sm-2 control-label">市场活动源&nbsp;&nbsp;<a href="javascript:void(0);" data-toggle="modal" data-target="#findMarketActivity"><span class="glyphicon glyphicon-search"></span></a></label>
 			<div class="col-sm-10" style="width: 300px;">
-				<input type="text" class="form-control" id="create-activitySrc" name="activityId">
+				<input type="text" readonly="readonly" class="form-control" id="create-activitySrc" name="activityId">
 			</div>
 		</div>
 		
 		<div class="form-group">
 			<label for="create-contactsName" class="col-sm-2 control-label">联系人名称&nbsp;&nbsp;<a href="javascript:void(0);" data-toggle="modal" data-target="#findContacts"><span class="glyphicon glyphicon-search"></span></a></label>
 			<div class="col-sm-10" style="width: 300px;">
-				<input type="text" class="form-control" id="create-contactsName" name="contactsId">
+				<input type="text" readonly="readonly" class="form-control" id="create-contactsName" name="contactsId">
 			</div>
 		</div>
 		
